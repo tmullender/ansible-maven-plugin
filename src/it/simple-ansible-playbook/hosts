@@ -1,0 +1,2 @@
+[all]
+dummy ansible_host=localhost

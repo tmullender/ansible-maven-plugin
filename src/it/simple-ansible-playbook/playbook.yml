@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - name: Touch file
+      command: "touch {{ root }}/touch.txt"
