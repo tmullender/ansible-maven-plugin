@@ -7,6 +7,7 @@ of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playb
 
 ## Goals Overview
 
+* __ansible:help__ displays the available goals and parameters
 * [ansible:ansible](#ansible) executes an ansible module, using the ansible executable
 * [ansible:playbook](#playbook) runs an ansible playbook, using the ansible-playbook executable
 
