@@ -1,5 +1,7 @@
 # Ansible Maven Plugin 
 
+[![Build Status](https://travis-ci.org/tmullender/ansible-maven-plugin.svg?branch=master)](https://travis-ci.org/tmullender/ansible-maven-plugin)
+
 A [maven plugin](http://maven.apache.org/plugins/index.html) to simplify the running 
 of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within Maven
 
