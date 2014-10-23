@@ -27,10 +27,9 @@
               <goal>ansible</goal>
             </goals>
             <configuration>
-              <workingDirectory>${project.basedir}</workingDirectory>
               <executable>ansible</executable>
               <moduleName>copy</moduleName>
-              <moduleArgs>src=pom.xml dest=${project.build.directory}</moduleArgs>
+              <moduleArgs>src=a dest=b</moduleArgs>
               <connection>local</connection>
               <hosts>localhost</hosts>
             </configuration>

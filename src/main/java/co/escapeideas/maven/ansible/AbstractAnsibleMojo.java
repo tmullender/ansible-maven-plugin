@@ -72,7 +72,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     /**
      * The directory in which to run, defaults to the projects basedir
      */
-    @Parameter( defaultValue = "${basedir}", required = true)
+    @Parameter( defaultValue = "${project.build.directory}", required = true)
     private File workingDirectory;
 
     /**

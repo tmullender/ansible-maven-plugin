@@ -27,7 +27,6 @@
               <goal>ansible</goal>
             </goals>
             <configuration>
-              <workingDirectory>${project.basedir}</workingDirectory>
               <executable>ansible</executable>
               <moduleName>command</moduleName>
               <moduleArgs>sleep 2</moduleArgs>

@@ -27,9 +27,10 @@
               <goal>playbook</goal>
             </goals>
             <configuration>
-              <extraVars>root=${project.build.directory}</extraVars>
-              <inventory>${project.basedir}/hosts</inventory>
               <connection>local</connection>
+              <extraVars>var=value</extraVars>
+              <inventory>${project.basedir}/hosts</inventory>
+              <playbook>${project.basedir}/playbook.yml</playbook>
             </configuration>
           </execution>
         </executions>

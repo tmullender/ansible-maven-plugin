@@ -1,3 +1,3 @@
-File touchFile = new File( basedir, "target/pom.xml" );
+String output = new File( basedir, "target/output" ).text;
 
-assert touchFile.isFile()
+assert output =~ "ansible -c local -a src=a dest=b -m copy localhost"

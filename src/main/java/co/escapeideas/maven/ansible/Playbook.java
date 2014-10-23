@@ -52,7 +52,7 @@ public class Playbook extends AbstractAnsibleMojo
      * The playbook to run, defaults to <b>playbook.yml</b>
      */
     @Parameter( defaultValue = "playbook.yml", required = true )
-    private File playbook;
+    private String playbook;
 
     @Override
     protected String getArgument() throws IOException {
@@ -75,18 +75,19 @@ public class Playbook extends AbstractAnsibleMojo
 
     /**
      * Checks whether the given file is an absolute path or a classpath file
-     * @param file
+     * @param path
      * @return
      * @throws IOException
      */
-    private String findClasspathFile(final File file) throws IOException {
-        if (file == null){
+    private String findClasspathFile(final String path) throws IOException {
+        if (path == null){
             return null;
         }
+        final File file = new File(path);
         if (file.exists()){
             return file.getAbsolutePath();
         }
-        return createTmpFile(file.getPath()).getAbsolutePath();
+        return createTmpFile(path).getAbsolutePath();
     }
 
     /**
@@ -96,6 +97,7 @@ public class Playbook extends AbstractAnsibleMojo
      * @throws IOException if the path is not found
      */
     private File createTmpFile(final String path) throws IOException {
+        getLog().debug("Creating temporary file for: " + path);
         final File output = new File(System.getProperty("java.io.tmpdir"), "ansible-maven-plugin." + System.nanoTime());
         final FileOutputStream outputStream = new FileOutputStream(output);
         final InputStream inputStream = getClass().getResourceAsStream("/" + path);

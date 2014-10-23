@@ -1,3 +1,3 @@
-File touchFile = new File( basedir, "target/touch.txt" );
+String output = new File( basedir, "target/output" ).text;
 
-assert touchFile.isFile()
+assert output =~ "ansible-playbook -c local -i .*/hosts -e var=value .*/playbook.yml"
