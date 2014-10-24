@@ -8,9 +8,29 @@
   <packaging>maven-plugin</packaging>
 
   <name>ansible-maven-plugin Maven Plugin</name>
+  <description>A Maven plugin to facilitate the running of Ansible commands or playbooks
+    as part of a maven project</description>
+  <url>https://github.com/tmullender/ansible-maven-plugin</url>
 
-  <!-- FIXME change it to the project's website -->
-  <url>http://maven.apache.org</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Tim Mullender</name>
+      <organizationUrl>https://github.com/tmullender</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git@github.com:tmullender/ansible-maven-plugin.git</connection>
+    <developerConnection>scm:git:git@github.com:tmullender/ansible-maven-plugin.git</developerConnection>
+    <url>git@github.com:tmullender/ansible-maven-plugin.git</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +63,30 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
