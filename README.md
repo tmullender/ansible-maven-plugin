@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.org/tmullender/ansible-maven-plugin.svg?branch=master)](https://travis-ci.org/tmullender/ansible-maven-plugin)
 
 A [maven plugin](http://maven.apache.org/plugins/index.html) to simplify the running 
-of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within Maven
+of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within Maven. 
+Available from the [Central Repository](http://search.maven.org/)
 
 ## Goals Overview
 
@@ -17,6 +18,22 @@ See the [integration tests](src/it) for examples of using the plugin within a pr
 
 ### ansible
 ```
+      <plugin>
+        <groupId>co.escapeideas.maven</groupId>
+        <artifactId>ansible-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>ansible</id>
+            <goals>
+              <goal>ansible</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+```
+
+```
   mvn co.escapeideas.maven:ansible-maven-plugin:ansible -DmoduleName=ping -Dhosts=localhost
 ``` 
  
@@ -29,6 +46,22 @@ See the [integration tests](src/it) for examples of using the plugin within a pr
 Executes the ansible __ping__ module with the host as __localhost__
 
 ### playbook
+```
+      <plugin>
+        <groupId>co.escapeideas.maven</groupId>
+        <artifactId>ansible-maven-plugin</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <id>ansible-playbook</id>
+            <goals>
+              <goal>playbook</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+```
+
 ```
   mvn co.escapeideas.maven:ansible-maven-plugin:playbook -Dplaybook=playbook.yml 
 ```  
@@ -92,3 +125,6 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   vaultPasswordFile|File|Vault password file | No
   workingDirectory|File|The directory in which to run, defaults to _basedir_ | __Yes__
 
+## Release Notes
+
+### 1.0.0 Initial release 24-10-2014
