@@ -105,15 +105,17 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     }
 
     /**
-     * The argument to be used for the command
-     * @return
+     * The argument to be used for the command.
+     * For <b>ansible</b> this is the hosts
+     * For <b>ansible-playbook</b> this is the playbook
+     * @return the argument to pass
      * @throws IOException
      */
     protected abstract String getArgument() throws IOException;
 
     /**
      * The executable for the command
-     * @return
+     * @return the name of the command to run
      */
     protected abstract String getExecutable();
 
@@ -137,7 +139,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
      * Creates a list for the given option, an empty list if the option's value is null
      * @param option
      * @param value
-     * @return
+     * @return a list of the strings for the given option, empty if the option should not be used
      */
     protected List<String> createOption(final String option, final Object value) {
         if (value == null){
