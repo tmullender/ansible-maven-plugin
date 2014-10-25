@@ -6,9 +6,9 @@ A [maven plugin](http://maven.apache.org/plugins/index.html) to simplify the run
 of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within Maven. 
 Available from the [Central Repository](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22ansible-maven-plugin%22)
 
-* [Overview](#Overview)
-* [Usage](#Usage)
-* [Goals](#Goals)
+* [Overview](#overview)
+* [Usage](#usage)
+* [Goals](#goals)
 
 ## Overview
 
@@ -89,11 +89,10 @@ or in short form
 
 ## Goals
 
-* [ansible](#ansible-parameters)
-* [playbook](#playbook-parameters)
+* [ansible](#ansible-1)
+* [playbook](#playbook-1)
 
-<a id="ansible-parameters"></a>
-### ansible
+### ansible 
 
 Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
 
@@ -119,7 +118,6 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   
 To use a parameter on the command line, prefix it with __ansible.__
   
-<a id="playbook-parameters"></a>
 ### playbook
 
 Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
