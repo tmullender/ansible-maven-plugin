@@ -21,37 +21,37 @@ public class Playbook extends AbstractAnsibleMojo
     /**
      * The executable to use for this execution, defaults to <b>ansible-playbook</b>
      */
-    @Parameter( defaultValue = "ansible-playbook", required = true )
+    @Parameter( defaultValue = "ansible-playbook", required = true, property = "ansible.executable" )
     private String executable;
 
     /**
      * Additional variables as key=value or YAML/JSON
      */
-    @Parameter
+    @Parameter( property = "ansible.extraVars" )
     private String extraVars;
 
     /**
      * Only run plays and tasks whose tags do not match these values
      */
-    @Parameter
+    @Parameter( property = "ansible.skipTags" )
     private String skipTags;
 
     /**
      * Start the playbook at the task matching this name
      */
-    @Parameter
+    @Parameter( property = "ansible.startAtTask" )
     private String startAtTask;
 
     /**
      * Only run plays and tasks tagged with these values
      */
-    @Parameter
+    @Parameter( property = "ansible.tags" )
     private String tags;
 
     /**
      * The playbook to run, defaults to <b>playbook.yml</b>
      */
-    @Parameter( defaultValue = "playbook.yml", required = true )
+    @Parameter( defaultValue = "playbook.yml", required = true, property = "ansible.playbook" )
     private String playbook;
 
     @Override

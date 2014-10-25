@@ -18,61 +18,61 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     /**
      * Connection type to use
      */
-    @Parameter
+    @Parameter( property = "ansible.connection" )
     private String connection;
 
     /**
      * The number of parallel processes to use
      */
-    @Parameter
+    @Parameter( property = "ansible.forks" )
     private Integer forks;
 
     /**
      * The inventory host file
      */
-    @Parameter
+    @Parameter( property = "ansible.inventory" )
     private File inventory;
 
     /**
      * Limit selected hosts to an additional pattern
      */
-    @Parameter
+    @Parameter( property = "ansible.limit" )
     private String limit;
 
     /**
      * The path to the ansible module library
      */
-    @Parameter
+    @Parameter( property = "ansible.modulePath" )
     private File modulePath;
 
     /**
      * Use this file to authenticate the connection
      */
-    @Parameter
+    @Parameter( property = "ansible.privateKey" )
     private File privateKey;
 
     /**
      * Override the SSH timeout in seconds
      */
-    @Parameter
+    @Parameter( property = "ansible.timeout" )
     private Integer timeout;
 
     /**
      * Connect as this user
      */
-    @Parameter
+    @Parameter( property = "ansible.remoteUser" )
     private String remoteUser;
 
     /**
      * Vault password file
      */
-    @Parameter
+    @Parameter( property = "ansible.vaultPasswordFile" )
     private File vaultPasswordFile;
 
     /**
      * The directory in which to run, defaults to the projects basedir
      */
-    @Parameter( defaultValue = "${project.build.directory}", required = true)
+    @Parameter( defaultValue = "${project.build.directory}", required = true, property = "ansible.workingDirectory" )
     private File workingDirectory;
 
     /**
@@ -82,17 +82,31 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
      */
     public void execute() throws MojoExecutionException {
         try {
-            final List<String> command = new ArrayList<String>();
-            command.add(getExecutable());
-            addOptions(command);
-            command.add(getArgument());
-            getLog().info("Working directory: " + workingDirectory);
-            getLog().info("Command: " + command);
+            final List<String> command = createCommand();
+            checkWorkingDirectory();
             final ProcessBuilder builder = new ProcessBuilder(command);
             builder.directory(workingDirectory);
             logProcess(builder.start());
         } catch (IOException e) {
             throw new MojoExecutionException("Unable to run playbook", e);
+        }
+    }
+
+    private List<String> createCommand() throws IOException {
+        final List<String> command = new ArrayList<String>();
+        command.add(getExecutable());
+        addOptions(command);
+        command.add(getArgument());
+        getLog().info("Command: " + command);
+        return command;
+    }
+
+    private void checkWorkingDirectory() {
+        if (!workingDirectory.exists()){
+            workingDirectory = new File(System.getProperty("java.io.tmpdir"));
+            getLog().info("Updated working directory: " + workingDirectory);
+        } else {
+            getLog().info("Working directory: " + workingDirectory);
         }
     }
 
