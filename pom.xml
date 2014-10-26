@@ -113,7 +113,7 @@
             <goal>clean</goal>
             <goal>verify</goal>
           </goals>
-          <invokerPropertiesFile>test.properties</invokerPropertiesFile>
+          <invokerPropertiesFile>invoker.properties</invokerPropertiesFile>
           <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
           <pomIncludes>
             <pomInclude>*/pom.xml</pomInclude>
