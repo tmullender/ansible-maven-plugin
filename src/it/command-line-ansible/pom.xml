@@ -31,6 +31,7 @@
                 <argument>@project.groupId@:@project.artifactId@:@project.version@:ansible</argument>
                 <argument>-Dansible.moduleName=copy</argument>
                 <argument>-Dansible.moduleArgs='src=a dest=b'</argument>
+                <argument>-Dansible.workingDirectory=/tmp</argument>
               </arguments>
             </configuration>
           </execution>

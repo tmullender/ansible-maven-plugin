@@ -31,6 +31,7 @@
                 <argument>@project.groupId@:@project.artifactId@:@project.version@:playbook</argument>
                 <argument>-Dansible.connection=local</argument>
                 <argument>-Dansible.inventory=my-hosts</argument>
+                <argument>-Dansible.workingDirectory=/tmp</argument>
               </arguments>
             </configuration>
           </execution>
