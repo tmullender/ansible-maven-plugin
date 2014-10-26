@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/tmullender/ansible-maven-plugin.svg?branch=master)](https://travis-ci.org/tmullender/ansible-maven-plugin)
 
-A [maven plugin](http://maven.apache.org/plugins/index.html) to simplify the running 
-of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within Maven. 
+A [Maven plugin](http://maven.apache.org/plugins/index.html) to simplify the running 
+of [Ansible](http://docs.ansible.com/) [playbooks](http://docs.ansible.com/playbooks.html) from within a Maven Project.
+ 
 Available from the [Central Repository](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22ansible-maven-plugin%22)
 
 * [Overview](#overview)

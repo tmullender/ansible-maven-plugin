@@ -13,31 +13,4 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.3.2</version>
-        <executions>
-          <execution>
-            <phase>test</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>mvn</executable>
-              <arguments>
-                <argument>@project.groupId@:@project.artifactId@:@project.version@:ansible</argument>
-                <argument>-Dansible.moduleName=copy</argument>
-                <argument>-Dansible.moduleArgs='src=a dest=b'</argument>
-                <argument>-Dansible.workingDirectory=/tmp</argument>
-              </arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-
 </project>

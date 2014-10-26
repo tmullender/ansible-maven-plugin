@@ -104,25 +104,26 @@
         <artifactId>maven-invoker-plugin</artifactId>
         <version>1.9</version>
         <configuration>
-          <skipInstallation>${skipTests}</skipInstallation>
-          <skipInvocation>${skipTests}</skipInvocation>
+          <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
           <debug>true</debug>
           <environmentVariables>
             <PATH>${basedir}/src/test/resources:${env.PATH}</PATH>
           </environmentVariables>
-          <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-          <pomIncludes>
-            <pomInclude>*/pom.xml</pomInclude>
-          </pomIncludes>
-          <postBuildHookScript>verify</postBuildHookScript>
-          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-          <settingsFile>src/it/settings.xml</settingsFile>
-          <streamLogs>${streamLogs}</streamLogs>
-          <showErrors>true</showErrors>
           <goals>
             <goal>clean</goal>
             <goal>verify</goal>
           </goals>
+          <invokerPropertiesFile>test.properties</invokerPropertiesFile>
+          <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+          <pomIncludes>
+            <pomInclude>*/pom.xml</pomInclude>
+          </pomIncludes>
+          <postBuildHookScript>verify</postBuildHookScript>
+          <settingsFile>src/it/settings.xml</settingsFile>
+          <showErrors>true</showErrors>
+          <skipInvocation>${skipTests}</skipInvocation>
+          <skipInstallation>${skipTests}</skipInstallation>
+          <streamLogs>${streamLogs}</streamLogs>
         </configuration>
         <executions>
           <execution>
