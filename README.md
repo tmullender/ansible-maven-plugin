@@ -10,6 +10,7 @@ Available from the [Central Repository](http://search.maven.org/#search%7Cga%7C1
 * [Overview](#overview)
 * [Usage](#usage)
 * [Goals](#goals)
+* [Release Notes](#release-notes)
 
 ## Overview
 
@@ -32,7 +33,7 @@ To execute the ansible __ping__ module with the host as __localhost__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <executions>
           <execution>
             <id>ansible</id>
@@ -64,7 +65,7 @@ To run the playbook __playbook.yml__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <executions>
           <execution>
             <id>ansible-playbook</id>
@@ -150,3 +151,8 @@ To use a parameter on the command line, prefix it with __ansible.__
 
 ### 1.0.0 Initial release 
   Release date: 24-10-2014
+### 1.0.1 Bug fix release
+  Release date: 26-10-2014
+  
+  * [Issue#1](issues/1) Command line execution fails outside of project directories
+
