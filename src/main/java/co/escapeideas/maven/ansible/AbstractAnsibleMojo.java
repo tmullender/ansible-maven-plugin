@@ -2,6 +2,7 @@ package co.escapeideas.maven.ansible;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.*;
@@ -70,25 +71,35 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private File vaultPasswordFile;
 
     /**
-     * The directory in which to run, defaults to the projects basedir
+     * The directory in which to run, defaults to the projects build directory
      */
     @Parameter( defaultValue = "${project.build.directory}", required = true, property = "ansible.workingDirectory" )
     private File workingDirectory;
+
+    /**
+     * If true, the build will fail when the ansible command returns an error(a non zero exit status),
+     * defaults to false
+     */
+    @Parameter( defaultValue = "false", property = "ansible.failOnAnsibleError" )
+    private boolean failOnAnsibleError;
 
     /**
      * Constructs a command from the configured parameters and executes it, logging output at debug
      *
      * @throws MojoExecutionException
      */
-    public void execute() throws MojoExecutionException {
+    public void execute() throws MojoExecutionException, MojoFailureException {
         try {
             final List<String> command = createCommand();
             checkWorkingDirectory();
-            final ProcessBuilder builder = new ProcessBuilder(command);
-            builder.directory(workingDirectory);
-            logProcess(builder.start());
+            final int status = execute(command);
+            if (failOnAnsibleError && status != 0){
+                throw new MojoFailureException("Non-zero exit status returned");
+            }
         } catch (IOException e) {
             throw new MojoExecutionException("Unable to run playbook", e);
+        } catch (InterruptedException e) {
+            throw new MojoExecutionException("Run interrupted", e);
         }
     }
 
@@ -110,11 +121,25 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         }
     }
 
-    private void logProcess(final Process start) throws IOException {
-        final BufferedReader output = new BufferedReader(new InputStreamReader(start.getInputStream()));
+    private int execute(final List<String> command) throws IOException, InterruptedException {
+        final ProcessBuilder builder = new ProcessBuilder(command);
+        builder.directory(workingDirectory);
+        final Process process = builder.start();
+        process.waitFor();
+        logStream(process.getInputStream(), false);
+        logStream(process.getErrorStream(), true);
+        return process.exitValue();
+    }
+
+    private void logStream(final InputStream inputStream, final boolean error) throws IOException {
+        final BufferedReader output = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         while((line = output.readLine()) != null){
-            getLog().debug(line);
+            if (error) {
+                getLog().warn(line);
+            } else {
+                getLog().debug(line);
+            }
         }
     }
 
