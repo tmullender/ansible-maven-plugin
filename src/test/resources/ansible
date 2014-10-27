@@ -1,3 +1,9 @@
 #!/bin/bash
 
-echo "ansible $@" > output
+if [ "$2" == "ERROR" ]
+then
+  >&2 echo "ERROR: ansible $@"
+  exit 1
+else
+  echo "ansible $@" > output
+fi

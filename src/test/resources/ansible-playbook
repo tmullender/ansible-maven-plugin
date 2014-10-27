@@ -1,3 +1,9 @@
 #!/bin/bash
 
-echo "ansible-playbook $@" > output
+if [ "$2" == "ERROR" ]
+then
+  >&2 echo "ERROR: ansible-playbook $@"
+  exit 1
+else 
+  echo "ansible-playbook $@" > output
+fi
