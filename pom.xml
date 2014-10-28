@@ -124,6 +124,7 @@
           <skipInvocation>${skipTests}</skipInvocation>
           <skipInstallation>${skipTests}</skipInstallation>
           <streamLogs>${streamLogs}</streamLogs>
+          <testPropertiesFile>test.properties</testPropertiesFile>
         </configuration>
         <executions>
           <execution>
