@@ -154,5 +154,5 @@ To use a parameter on the command line, prefix it with __ansible.__
 ### 1.0.1 Bug fix release
   Release date: 26-10-2014
   
-  * [Issue#1](issues/1) Command line execution fails outside of project directories
+  * [Issue#1](https://github.com/tmullender/ansible-maven-plugin/issues/1) Command line execution fails outside of project directories
 
