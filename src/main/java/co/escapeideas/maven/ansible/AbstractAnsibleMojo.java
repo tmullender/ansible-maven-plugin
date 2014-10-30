@@ -16,6 +16,11 @@ import java.util.List;
  * Created by tmullender on 22/10/14.
  */
 public abstract class AbstractAnsibleMojo extends AbstractMojo {
+
+    private static final String NEW_LINE_SEPARATOR = System.getProperty("line.separator");;
+    private static final String STDERR_LOG = "stderr.log";
+    private static final String STDOUT_LOG = "stdout.log";
+
     /**
      * Connection type to use
      */
@@ -84,6 +89,12 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private boolean failOnAnsibleError;
 
     /**
+     * If present the plugin will log the output of the execution to files in this directory
+     */
+    @Parameter( property = "ansible.logDirectory" )
+    private File logDirectory;
+
+    /**
      * Constructs a command from the configured parameters and executes it, logging output at debug
      *
      * @throws MojoExecutionException
@@ -133,14 +144,34 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     private void logStream(final InputStream inputStream, final boolean error) throws IOException {
         final BufferedReader output = new BufferedReader(new InputStreamReader(inputStream));
+        Writer fileWriter = null;
+        try {
+            fileWriter = createFileWriter(error);
+            logStream(output, fileWriter, error);
+        } finally {
+            fileWriter.close();
+        }
+    }
+
+    private void logStream(final BufferedReader input, final Writer output, final boolean error) throws IOException {
         String line;
-        while((line = output.readLine()) != null){
+        while((line = input.readLine()) != null){
             if (error) {
                 getLog().warn(line);
             } else {
                 getLog().debug(line);
             }
+            output.write(line);
+            output.write(NEW_LINE_SEPARATOR);
         }
+    }
+
+    private Writer createFileWriter(final boolean error) throws IOException {
+        if (logDirectory == null){
+            return new NoopWriter();
+        }
+        final File output = new File(logDirectory, error ? STDERR_LOG : STDOUT_LOG);
+        return new FileWriter(output, true);
     }
 
     /**

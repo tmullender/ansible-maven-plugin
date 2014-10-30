@@ -104,10 +104,12 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   background|Integer|Run asynchronously, failing after this number of seconds | No
   connection|String|Connection type to use | No
   executable|String|The executable to use for this execution, __defaults__ to _ansible_ | __Yes__
+  failOnAnsibleError|boolean|If true, the build will fail when the ansible command returns an error(a non zero exit status), __defaults__ to _false_ | No
   forks|Integer|The number of parallel processes to use | No
   hosts|String|Pattern for matching hosts to run the module against, __defaults__ to _localhost_ | __Yes__
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
+  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   moduleArgs|String|Module arguments | No
   moduleName|String|Module name to execute, __defaults__ to _ping_ | __Yes__
   modulePath|File|The path to the ansible module library | No
@@ -130,9 +132,11 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   connection|String|Connection type to use | No
   executable|String|The executable to use for this execution, __defaults__ to _ansible-playbook_ | __Yes__
   extraVars|String|Additional variables as key=value or YAML/JSON | No
+  failOnAnsibleError|boolean|If true, the build will fail when the ansible command returns an error(a non zero exit status), __defaults__ to _false_ | No
   forks|Integer|The number of parallel processes to use | No
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
+  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   modulePath|File|The path to the ansible module library | No
   playbook|File|The playbook to run, __defaults__ to _playbook.yml_ | __Yes__
   pollInterval|Integer|The poll interval if using background | No
