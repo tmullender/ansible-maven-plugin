@@ -17,10 +17,6 @@ import java.util.List;
  */
 public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
-    private static final String NEW_LINE_SEPARATOR = System.getProperty("line.separator");;
-    private static final String STDERR_LOG = "stderr.log";
-    private static final String STDOUT_LOG = "stdout.log";
-
     /**
      * Connection type to use
      */
@@ -64,6 +60,13 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private Integer timeout;
 
     /**
+     * Log output to this directory
+     * @since 1.1.0
+     */
+    @Parameter( property = "ansible.tree" )
+    private File tree;
+
+    /**
      * Connect as this user
      */
     @Parameter( property = "ansible.remoteUser" )
@@ -88,13 +91,6 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
      */
     @Parameter( defaultValue = "false", property = "ansible.failOnAnsibleError" )
     private boolean failOnAnsibleError;
-
-    /**
-     * If present the plugin will log the output of the execution to files in this directory
-     * @since 1.1.0
-     */
-    @Parameter( property = "ansible.logDirectory" )
-    private File logDirectory;
 
     /**
      * Constructs a command from the configured parameters and executes it, logging output at debug
@@ -146,34 +142,14 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     private void logStream(final InputStream inputStream, final boolean error) throws IOException {
         final BufferedReader output = new BufferedReader(new InputStreamReader(inputStream));
-        Writer fileWriter = null;
-        try {
-            fileWriter = createFileWriter(error);
-            logStream(output, fileWriter, error);
-        } finally {
-            fileWriter.close();
-        }
-    }
-
-    private void logStream(final BufferedReader input, final Writer output, final boolean error) throws IOException {
         String line;
-        while((line = input.readLine()) != null){
+        while((line = output.readLine()) != null){
             if (error) {
                 getLog().warn(line);
             } else {
                 getLog().debug(line);
             }
-            output.write(line);
-            output.write(NEW_LINE_SEPARATOR);
         }
-    }
-
-    private Writer createFileWriter(final boolean error) throws IOException {
-        if (logDirectory == null){
-            return new NoopWriter();
-        }
-        final File output = new File(logDirectory, error ? STDERR_LOG : STDOUT_LOG);
-        return new FileWriter(output, true);
     }
 
     /**
@@ -202,6 +178,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         command.addAll(createOption("-l", limit));
         command.addAll(createOption("-M", modulePath));
         command.addAll(createOption("--private-key", privateKey));
+        command.addAll(createOption("-t", tree));
         command.addAll(createOption("-T", timeout));
         command.addAll(createOption("-u", remoteUser));
         command.addAll(createOption("--vault-password-file", vaultPasswordFile));

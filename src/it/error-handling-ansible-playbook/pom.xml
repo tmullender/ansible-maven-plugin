@@ -30,6 +30,7 @@
               <connection>ERROR</connection>
               <inventory>@inventory.file@</inventory>
               <playbook>@playbook.file@</playbook>
+              <tree>${project.build.directory}/output</tree>
             </configuration>
           </execution>
         </executions>
