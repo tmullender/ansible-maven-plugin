@@ -29,8 +29,8 @@
             <configuration>
               <connection>local</connection>
               <extraVars>var=value</extraVars>
-              <inventory>${project.basedir}/hosts</inventory>
-              <playbook>${project.basedir}/playbook.yml</playbook>
+              <inventory>@inventory.file@</inventory>
+              <playbook>@playbook.file@</playbook>
             </configuration>
           </execution>
         </executions>

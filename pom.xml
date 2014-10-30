@@ -109,6 +109,10 @@
           <environmentVariables>
             <PATH>${basedir}/src/test/resources:${env.PATH}</PATH>
           </environmentVariables>
+          <filterProperties>
+            <inventory.file>${project.basedir}/src/it/hosts</inventory.file>
+            <playbook.file>${project.basedir}/src/it/playbook.yml</playbook.file>
+          </filterProperties>
           <goals>
             <goal>clean</goal>
             <goal>verify</goal>

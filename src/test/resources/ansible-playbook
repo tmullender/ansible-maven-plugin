@@ -5,5 +5,5 @@ then
   >&2 echo "ERROR: ansible-playbook $@"
   exit 1
 else 
-  echo "ansible-playbook $@" > output
+  echo "ansible-playbook $@"
 fi

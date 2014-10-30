@@ -5,5 +5,5 @@ then
   >&2 echo "ERROR: ansible $@"
   exit 1
 else
-  echo "ansible $@" > output
+  echo "ansible $@"
 fi

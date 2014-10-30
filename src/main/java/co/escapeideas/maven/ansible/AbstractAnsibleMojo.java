@@ -84,12 +84,14 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     /**
      * If true, the build will fail when the ansible command returns an error(a non zero exit status),
      * defaults to false
+     * @since 1.1.0
      */
     @Parameter( defaultValue = "false", property = "ansible.failOnAnsibleError" )
     private boolean failOnAnsibleError;
 
     /**
      * If present the plugin will log the output of the execution to files in this directory
+     * @since 1.1.0
      */
     @Parameter( property = "ansible.logDirectory" )
     private File logDirectory;
