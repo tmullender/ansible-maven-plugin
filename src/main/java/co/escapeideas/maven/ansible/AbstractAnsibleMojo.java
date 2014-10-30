@@ -79,6 +79,13 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private File vaultPasswordFile;
 
     /**
+     * If further options are required to the ansible command they can be added here
+     * @since 1.1.0
+     */
+    @Parameter( property = "ansible.options" )
+    private List<String> options;
+
+    /**
      * The directory in which to run, defaults to the projects build directory
      */
     @Parameter( defaultValue = "${project.build.directory}", required = true, property = "ansible.workingDirectory" )
@@ -116,6 +123,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         final List<String> command = new ArrayList<String>();
         command.add(getExecutable());
         addOptions(command);
+        command.addAll(options);
         command.add(getArgument());
         getLog().info("Command: " + command);
         return command;
