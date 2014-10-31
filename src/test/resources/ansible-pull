@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$2" == "ERROR" ]
+then
+  >&2 echo "ERROR: ansible-pull $@"
+  exit 1
+else
+  echo "ansible-pull $@"
+fi
