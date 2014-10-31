@@ -18,11 +18,13 @@ Available from the [Central Repository](http://search.maven.org/#search%7Cga%7C1
 * __ansible:help__ displays the available goals and parameters
 * [ansible:ansible](#ansible) executes an ansible module, using the ansible executable
 * [ansible:playbook](#playbook) runs an ansible playbook, using the ansible-playbook executable
+* [ansible:pull](#pull) set up a remote copy of ansible, using the ansible-pull executable
 
 ## Usage
 
 * [ansible](#ansible)
 * [playbook](#playbook)
+* [pull](#pull)
 
 See the [integration tests](src/it) for examples of using the plugin within a project
 
@@ -87,13 +89,51 @@ From the command line
 or in short form
 
 ```
-  mvn ansible:playbook -Dplaybook=ansible.playbook.yml 
+  mvn ansible:playbook -Dansible.playbook=playbook.yml 
 ```  
+
+### pull
+
+To pull the repo __git://example.com/repo__
+
+```
+      <plugin>
+        <groupId>co.escapeideas.maven</groupId>
+        <artifactId>ansible-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <executions>
+          <execution>
+            <id>ansible-pull</id>
+            <goals>
+              <goal>pull</goal>
+            </goals>
+          </execution>
+          <configuration>
+            <directory>somewhere</directory>
+            <url>git://example.com/repo<url>
+          </configuration>
+        </executions>
+      </plugin>
+```
+
+From the command line
+
+```
+  mvn co.escapeideas.maven:ansible-maven-plugin:pull -Dansible.url='git://example.com/repo' -Dansible.directory=somewhere 
+```  
+
+or in short form
+
+```
+  mvn ansible:pull -Dansible.url='git://example.com/repo' -Dansible.directory=somewhere 
+```  
+
 
 ## Goals
 
 * [ansible](#ansible-1)
 * [playbook](#playbook-1)
+* [pull](#pull-1)
 
 ### ansible 
 
@@ -110,7 +150,6 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   hosts|String|Pattern for matching hosts to run the module against, __defaults__ to _localhost_ | __Yes__
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
-  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   moduleArgs|String|Module arguments | No
   moduleName|String|Module name to execute, __defaults__ to _ping_ | __Yes__
   modulePath|File|The path to the ansible module library | No
@@ -137,7 +176,6 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   forks|Integer|The number of parallel processes to use | No
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
-  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   modulePath|File|The path to the ansible module library | No
   playbook|File|The playbook to run, __defaults__ to _playbook.yml_ | __Yes__
   pollInterval|Integer|The poll interval if using background | No
@@ -147,6 +185,30 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   remoteUser|String|Connect as this user | No
   tags|String|Only run plays and tasks tagged with these values | No
   timeout|Integer|Override the SSH timeout in seconds | No
+  vaultPasswordFile|File|Vault password file | No
+  workingDirectory|File|The directory in which to run, __defaults__ to _project.build.directory_ or the java tmp directory if it does not exist | __Yes__
+
+To use a parameter on the command line, prefix it with __ansible.__
+
+### pull
+
+Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
+
+####Parameters
+  Name | Type | Description | Required
+  :----|:----:|:------------|:-------:
+  checkout|String|The branch, tag or commit to checkout | No
+  executable|String|The executable to use for this execution, __defaults__ to _ansible-pull_ | __Yes__
+  extraVars|String|Additional variables as key=value or YAML/JSON | No
+  failOnAnsibleError|boolean|If true, the build will fail when the ansible command returns an error(a non zero exit status), __defaults__ to _false_ | No
+  force|boolean|Run the playbook even if the repository could not be updated, __defaults__ to _false_ | No
+  inventory|File|The inventory host file | No
+  moduleName|String|Module name used to check out repository | No
+  onlyIfChanged|boolean|Only run the playbook if the repository has been updated, __defaults__ to _false_ | No
+  playbook|File|The playbook to run | No
+  purge|boolean|Purge checkout after playbook run, __defaults__ to _false_ | No
+  sleep|Integer|Sleep for a random interval upto this number of seconds | No
+  url|String|URL of the playbook repository | No
   vaultPasswordFile|File|Vault password file | No
   workingDirectory|File|The directory in which to run, __defaults__ to _project.build.directory_ or the java tmp directory if it does not exist | __Yes__
 
