@@ -100,6 +100,22 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private boolean failOnAnsibleError;
 
     /**
+     * Gets the value for inventory
+     * @return
+     */
+    protected File getInventory() {
+        return inventory;
+    }
+
+    /**
+     * Get the value for the vault password file
+     * @return
+     */
+    protected File getVaultPasswordFile() {
+        return vaultPasswordFile;
+    }
+
+    /**
      * Constructs a command from the configured parameters and executes it, logging output at debug
      *
      * @throws MojoExecutionException
@@ -124,7 +140,10 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         command.add(getExecutable());
         addOptions(command);
         command.addAll(options);
-        command.add(getArgument());
+        final String argument = getArgument();
+        if (argument != null) {
+            command.add(argument);
+        }
         getLog().info("Command: " + command);
         return command;
     }
@@ -204,4 +223,74 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         }
         return Arrays.asList(option, String.valueOf(value));
     }
+
+    /**
+     * Creates a list for the given option, an empty list if the option's value is null
+     * @param option
+     * @param value
+     * @return a list of the strings for the given option, empty if the option should not be used
+     */
+    protected List<String> createOption(final String option, final boolean value) {
+        if (value){
+            return Arrays.asList(option);
+        }
+        return new ArrayList<String>();
+    }
+
+    /**
+     * Checks whether the given file is an absolute path or a classpath file
+     * @param path
+     * @return
+     * @throws IOException
+     */
+    protected String findClasspathFile(final String path) throws IOException {
+        if (path == null){
+            return null;
+        }
+        final File file = new File(path);
+        if (file.exists()){
+            return file.getAbsolutePath();
+        }
+        return createTmpFile(path).getAbsolutePath();
+    }
+
+    /**
+     * Copies a classpath resource to the tmp directory to allow it to be run by ansible
+     * @param path
+     * @return
+     * @throws IOException if the path is not found
+     */
+    private File createTmpFile(final String path) throws IOException {
+        getLog().debug("Creating temporary file for: " + path);
+        final File output = new File(System.getProperty("java.io.tmpdir"), "ansible-maven-plugin." + System.nanoTime());
+        final FileOutputStream outputStream = new FileOutputStream(output);
+        final InputStream inputStream = getClass().getResourceAsStream("/" + path);
+        if (inputStream == null){
+            throw new FileNotFoundException("Unable to locate: " + path);
+        }
+        copy(inputStream, outputStream);
+        return output;
+    }
+
+    /**
+     * Copies the input stream to the output stream using a 4K buffer
+     * @param inputStream
+     * @param outputStream
+     * @throws IOException
+     */
+    private void copy(final InputStream inputStream, final FileOutputStream outputStream) throws IOException {
+        final byte[] buffer = new byte[1024*4];
+        int n;
+        try {
+            while (-1 != (n = inputStream.read(buffer))) {
+                outputStream.write(buffer, 0, n);
+            }
+        } finally {
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
+
+
 }
