@@ -100,7 +100,7 @@ To pull the repo __git://example.com/repo__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
         <executions>
           <execution>
             <id>ansible-pull</id>
