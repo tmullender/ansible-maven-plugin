@@ -150,6 +150,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   hosts|String|Pattern for matching hosts to run the module against, __defaults__ to _localhost_ | __Yes__
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
+  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   moduleArgs|String|Module arguments | No
   moduleName|String|Module name to execute, __defaults__ to _ping_ | __Yes__
   modulePath|File|The path to the ansible module library | No
@@ -176,6 +177,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   forks|Integer|The number of parallel processes to use | No
   inventory|File|The inventory host file | No
   limit|String|Limit selected hosts to an additional pattern | No
+  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   modulePath|File|The path to the ansible module library | No
   playbook|File|The playbook to run, __defaults__ to _playbook.yml_ | __Yes__
   pollInterval|Integer|The poll interval if using background | No
@@ -203,6 +205,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   failOnAnsibleError|boolean|If true, the build will fail when the ansible command returns an error(a non zero exit status), __defaults__ to _false_ | No
   force|boolean|Run the playbook even if the repository could not be updated, __defaults__ to _false_ | No
   inventory|File|The inventory host file | No
+  logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   moduleName|String|Module name used to check out repository | No
   onlyIfChanged|boolean|Only run the playbook if the repository has been updated, __defaults__ to _false_ | No
   playbook|File|The playbook to run | No
@@ -218,10 +221,12 @@ To use a parameter on the command line, prefix it with __ansible.__
 
 ### 1.0.0 Initial release 
   Release date: 24-10-2014
+  
 ### 1.0.1 Bug fix release
   Release date: 26-10-2014
   
   * [Issue#1](https://github.com/tmullender/ansible-maven-plugin/issues/1) Command line execution fails outside of project directories
+  
 ### 1.1.0 Update release
   Release date: 02-12-2014
   
