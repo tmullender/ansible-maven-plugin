@@ -100,7 +100,7 @@ To pull the repo __git://example.com/repo__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.1.0</version>
         <executions>
           <execution>
             <id>ansible-pull</id>
@@ -222,4 +222,8 @@ To use a parameter on the command line, prefix it with __ansible.__
   Release date: 26-10-2014
   
   * [Issue#1](https://github.com/tmullender/ansible-maven-plugin/issues/1) Command line execution fails outside of project directories
-
+### 1.1.0 Update release
+  Release date: 02-12-2014
+  
+  * [Issue#2](https://github.com/tmullender/ansible-maven-plugin/issues/2) Improve error handling
+  * [Issue#3](https://github.com/tmullender/ansible-maven-plugin/issues/3) Add ansible-pull support
