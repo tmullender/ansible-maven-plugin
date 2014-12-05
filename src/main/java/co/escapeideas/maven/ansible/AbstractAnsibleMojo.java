@@ -165,41 +165,48 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         final ProcessBuilder builder = new ProcessBuilder(command);
         builder.directory(workingDirectory);
         final Process process = builder.start();
+        logOutput(process);
         process.waitFor();
-        logStream(process.getInputStream(), false);
-        logStream(process.getErrorStream(), true);
         return process.exitValue();
     }
 
-    private void logStream(final InputStream inputStream, final boolean error) throws IOException {
-        final BufferedReader output = new BufferedReader(new InputStreamReader(inputStream));
-        Writer fileWriter = null;
+    private void logOutput(final Process process) throws IOException {
+        final BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        final BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        final Writer outputFile = createFileWriter(STDOUT_LOG);
+        final Writer errorFile = createFileWriter(STDERR_LOG);
         try {
-            fileWriter = createFileWriter(error);
-            logStream(output, fileWriter, error);
+            processOutput(output, error, outputFile, errorFile);
         } finally {
-            fileWriter.close();
+            outputFile.close();
+            errorFile.close();
         }
     }
 
-    private void logStream(final BufferedReader input, final Writer output, final boolean error) throws IOException {
-        String line;
-        while((line = input.readLine()) != null){
-            if (error) {
-                getLog().warn(line);
-            } else {
-                getLog().debug(line);
+    private void processOutput(final BufferedReader output, final BufferedReader error,
+                               final Writer outputFile, final Writer errorFile) throws IOException {
+        String outputLine, errorLine = null;
+        while ((outputLine = output.readLine()) != null || (errorLine = error.readLine()) != null) {
+            if (outputLine != null) {
+                getLog().debug(outputLine);
+                outputFile.write(outputLine);
+                outputFile.write(NEW_LINE_SEPARATOR);
+                outputFile.flush();
             }
-            output.write(line);
-            output.write(NEW_LINE_SEPARATOR);
+            if (errorLine != null) {
+                getLog().warn(errorLine);
+                errorFile.write(errorLine);
+                errorFile.write(NEW_LINE_SEPARATOR);
+                errorFile.flush();
+            }
         }
     }
 
-    private Writer createFileWriter(final boolean error) throws IOException {
+    private Writer createFileWriter(final String fileName) throws IOException {
         if (logDirectory == null){
             return new NoopWriter();
         }
-        final File output = new File(logDirectory, error ? STDERR_LOG : STDOUT_LOG);
+        final File output = new File(logDirectory, fileName);
         return new FileWriter(output, true);
     }
 
