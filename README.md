@@ -232,3 +232,9 @@ To use a parameter on the command line, prefix it with __ansible.__
   
   * [Issue#2](https://github.com/tmullender/ansible-maven-plugin/issues/2) Improve error handling
   * [Issue#3](https://github.com/tmullender/ansible-maven-plugin/issues/3) Add ansible-pull support
+
+### 1.1.1 Bug fix release
+  Release date: 08-12-2014
+  
+  * [Issue#4](https://github.com/tmullender/ansible-maven-plugin/issues/4) Output is not logged until the process has completed
+  
