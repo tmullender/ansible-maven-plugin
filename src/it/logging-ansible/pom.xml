@@ -28,7 +28,7 @@
             </goals>
             <configuration>
               <connection>local</connection>
-              <logDirectory>${project.build.directory}</logDirectory>
+              <logDirectory>${project.build.directory}/log</logDirectory>
             </configuration>
           </execution>
         </executions>

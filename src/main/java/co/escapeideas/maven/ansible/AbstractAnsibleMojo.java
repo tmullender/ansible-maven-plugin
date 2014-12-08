@@ -205,6 +205,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private Writer createFileWriter(final String fileName) throws IOException {
         if (logDirectory == null){
             return new NoopWriter();
+        } else if (!logDirectory.exists()) {
+            logDirectory.mkdirs();
         }
         final File output = new File(logDirectory, fileName);
         return new FileWriter(output, true);
