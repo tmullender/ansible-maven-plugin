@@ -257,6 +257,24 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     }
 
     /**
+     * Creates a list for the given option, an empty list if the option's values is null
+     * @param option
+     * @param values
+     * @return a list of the strings for the given option, empty if the option should not be used
+     */
+    protected List<String> createOption(final String option, final List<String> values) {
+        if (values == null){
+            return new ArrayList<String>();
+        }
+        final List<String> list = new ArrayList<String>();
+        for (String value: values) {
+            list.add(option);
+            list.add(value);
+        }
+        return list;
+    }
+
+    /**
      * Creates a list for the given option, an empty list if the option's value is null
      * @param option
      * @param value

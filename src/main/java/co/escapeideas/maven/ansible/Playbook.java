@@ -28,7 +28,7 @@ public class Playbook extends AbstractAnsibleMojo
      * Additional variables as key=value or YAML/JSON
      */
     @Parameter( property = "ansible.extraVars" )
-    private String extraVars;
+    private List<String> extraVars;
 
     /**
      * Only run plays and tasks whose tags do not match these values
