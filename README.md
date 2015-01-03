@@ -172,7 +172,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   :----|:----:|:------------|:-------:
   connection|String|Connection type to use | No
   executable|String|The executable to use for this execution, __defaults__ to _ansible-playbook_ | __Yes__
-  extraVars|String|Additional variables as key=value or YAML/JSON | No
+  extraVars|List|Additional variables as key=value or YAML/JSON | No
   failOnAnsibleError|boolean|If true, the build will fail when the ansible command returns an error(a non zero exit status), __defaults__ to _false_ | No
   forks|Integer|The number of parallel processes to use | No
   inventory|File|The inventory host file | No
@@ -237,4 +237,9 @@ To use a parameter on the command line, prefix it with __ansible.__
   Release date: 08-12-2014
   
   * [Issue#4](https://github.com/tmullender/ansible-maven-plugin/issues/4) Output is not logged until the process has completed
+ 
+### 1.1.2 Bug fix release
+  Release date: 04-01-2015
   
+  * [Issue#5](https://github.com/tmullender/ansible-maven-plugin/issues/5) Specify multiple extraVars
+  * [Issue#6](https://github.com/tmullender/ansible-maven-plugin/issues/6) Configure buffer size
