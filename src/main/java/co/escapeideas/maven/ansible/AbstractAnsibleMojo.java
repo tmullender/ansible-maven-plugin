@@ -20,6 +20,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     private static final String NEW_LINE_SEPARATOR = System.getProperty("line.separator");;
     private static final String STDERR_LOG = "stderr.log";
     private static final String STDOUT_LOG = "stdout.log";
+    private final int BUFFER_SIZE = getBufferSize();
 
     /**
      * Connection type to use
@@ -171,8 +172,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     }
 
     private void logOutput(final Process process) throws IOException {
-        final BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        final BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        final BufferedReader output = new BufferedReader(new InputStreamReader(process.getInputStream()), BUFFER_SIZE);
+        final BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()), BUFFER_SIZE);
         final Writer outputFile = createFileWriter(STDOUT_LOG);
         final Writer errorFile = createFileWriter(STDERR_LOG);
         try {
@@ -341,6 +342,17 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         }
     }
 
-
+    private int getBufferSize() {
+        int size = 1024;
+        final String property = System.getProperty("ansible.maven.buffer.size");
+        if (property != null) {
+            try {
+                size = Integer.valueOf(property);
+            } catch (Exception nfe) {
+                getLog().warn("Error getting buffer size: " + nfe.getLocalizedMessage());
+            }
+        }
+        return size;
+    }
 
 }
