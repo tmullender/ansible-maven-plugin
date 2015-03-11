@@ -156,6 +156,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   modulePath|File|The path to the ansible module library | No
   pollInterval|Integer|The poll interval if using background | No
   privateKey|File|Use this file to authenticate the connection | No
+  promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
   remoteUser|String|Connect as this user | No
   timeout|Integer|Override the SSH timeout in seconds | No
   vaultPasswordFile|File|Vault password file | No
@@ -182,6 +183,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   playbook|File|The playbook to run, __defaults__ to _playbook.yml_ | __Yes__
   pollInterval|Integer|The poll interval if using background | No
   privateKey|File|Use this file to authenticate the connection | No
+  promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
   skipTags|String|Only run plays and tasks whose tags do not match these values | No
   startAtTask|String|Start the playbook at the task matching this name | No
   remoteUser|String|Connect as this user | No
@@ -210,6 +212,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   onlyIfChanged|boolean|Only run the playbook if the repository has been updated, __defaults__ to _false_ | No
   playbook|File|The playbook to run | No
   purge|boolean|Purge checkout after playbook run, __defaults__ to _false_ | No
+  promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
   sleep|Integer|Sleep for a random interval upto this number of seconds | No
   url|String|URL of the playbook repository | No
   vaultPasswordFile|File|Vault password file | No
