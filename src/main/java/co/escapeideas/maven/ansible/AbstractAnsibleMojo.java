@@ -104,6 +104,15 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     @Parameter( property = "ansible.logDirectory" )
     private File logDirectory;
 
+
+    /**
+     * If true, output messages will be promoted from debug messages to info messages,
+     * defaults to false
+     * @since 1.1.3
+     */
+    @Parameter( defaultValue = "false", property = "ansible.promoteDebugAsInfo" )
+    private boolean promoteDebugAsInfo;
+
     /**
      * Gets the value for inventory
      * @return
@@ -189,7 +198,11 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
         String outputLine, errorLine = null;
         while ((outputLine = output.readLine()) != null || (errorLine = error.readLine()) != null) {
             if (outputLine != null) {
-                getLog().debug(outputLine);
+            	if (promoteDebugAsInfo) {
+            		getLog().info(outputLine);
+            	} else {
+            		getLog().debug(outputLine);
+            	}
                 outputFile.write(outputLine);
                 outputFile.write(NEW_LINE_SEPARATOR);
                 outputFile.flush();
