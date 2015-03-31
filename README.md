@@ -36,7 +36,7 @@ To execute the ansible __ping__ module with the host as __localhost__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.1</version>
+        <version>1.2.0</version>
         <executions>
           <execution>
             <id>ansible</id>
@@ -68,7 +68,7 @@ To run the playbook __playbook.yml__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.0.1</version>
+        <version>1.2.0</version>
         <executions>
           <execution>
             <id>ansible-playbook</id>
@@ -100,7 +100,7 @@ To pull the repo __git://example.com/repo__
       <plugin>
         <groupId>co.escapeideas.maven</groupId>
         <artifactId>ansible-maven-plugin</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
         <executions>
           <execution>
             <id>ansible-pull</id>
@@ -246,3 +246,8 @@ To use a parameter on the command line, prefix it with __ansible.__
   
   * [Issue#5](https://github.com/tmullender/ansible-maven-plugin/issues/5) Specify multiple extraVars
   * [Issue#6](https://github.com/tmullender/ansible-maven-plugin/issues/6) Configure buffer size
+
+### 1.2.0 Update release
+  Release date: 31-03-2015
+
+  * [Issue#8](https://github.com/tmullender/ansible-maven-plugin/issues/8) Display output depending on a settings
