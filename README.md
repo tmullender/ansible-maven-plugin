@@ -186,6 +186,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
   skipTags|String|Only run plays and tasks whose tags do not match these values | No
   startAtTask|String|Start the playbook at the task matching this name | No
+  syntaxCheck|boolean|If true there is only syntax check instead of real play, __defaults__ to _false_ | No
   remoteUser|String|Connect as this user | No
   tags|String|Only run plays and tasks tagged with these values | No
   timeout|Integer|Override the SSH timeout in seconds | No
