@@ -1,15 +1,11 @@
 package co.escapeideas.maven.ansible;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
+import java.io.IOException;
+import java.util.List;
+
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Goal that runs an Ansible playbook
@@ -35,6 +31,12 @@ public class Playbook extends AbstractAnsibleMojo
      */
     @Parameter( property = "ansible.skipTags" )
     private String skipTags;
+
+    /**
+     * Check syntax only mode
+     */
+    @Parameter(property = "ansible.syntaxCheck")
+    private boolean syntaxCheck;
 
     /**
      * Start the playbook at the task matching this name
@@ -71,6 +73,7 @@ public class Playbook extends AbstractAnsibleMojo
         command.addAll(createOption("--skip-tags", skipTags));
         command.addAll(createOption("--start-at-task", startAtTask));
         command.addAll(createOption("-t", tags));
+        command.addAll(createOption("--syntax-check", syntaxCheck));
     }
 
 }
