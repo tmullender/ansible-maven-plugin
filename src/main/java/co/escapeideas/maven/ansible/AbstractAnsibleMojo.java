@@ -115,7 +115,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Gets the value for inventory
-     * @return
+     * @return the value
      */
     protected File getInventory() {
         return inventory;
@@ -123,7 +123,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Get the value for the vault password file
-     * @return
+     * @return the value
      */
     protected File getVaultPasswordFile() {
         return vaultPasswordFile;
@@ -132,7 +132,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
     /**
      * Constructs a command from the configured parameters and executes it, logging output at debug
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException when unable to run the ansible command
      */
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
@@ -231,7 +231,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
      * For <b>ansible</b> this is the hosts
      * For <b>ansible-playbook</b> this is the playbook
      * @return the argument to pass
-     * @throws IOException
+     * @throws IOException if unable to find the appropriate file
      */
     protected abstract String getArgument() throws IOException;
 
@@ -243,7 +243,7 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Adds the configured options to the list of command strings
-     * @param command
+     * @param command the existing command
      */
     protected void addOptions(final List<String> command) {
         command.addAll(createOption("-c", connection));
@@ -259,8 +259,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Creates a list for the given option, an empty list if the option's value is null
-     * @param option
-     * @param value
+     * @param option the option to add
+     * @param value the value for the option
      * @return a list of the strings for the given option, empty if the option should not be used
      */
     protected List<String> createOption(final String option, final Object value) {
@@ -272,8 +272,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Creates a list for the given option, an empty list if the option's values is null
-     * @param option
-     * @param values
+     * @param option the option to add
+     * @param values the values for the option
      * @return a list of the strings for the given option, empty if the option should not be used
      */
     protected List<String> createOption(final String option, final List<String> values) {
@@ -290,8 +290,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Creates a list for the given option, an empty list if the option's value is null
-     * @param option
-     * @param value
+     * @param option the option to add
+     * @param value the value for the option
      * @return a list of the strings for the given option, empty if the option should not be used
      */
     protected List<String> createOption(final String option, final boolean value) {
@@ -303,9 +303,9 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Checks whether the given file is an absolute path or a classpath file
-     * @param path
-     * @return
-     * @throws IOException
+     * @param path the relative path
+     * @return the absolute path to the extracted file
+     * @throws IOException if the path can not be determined
      */
     protected String findClasspathFile(final String path) throws IOException {
         if (path == null){
@@ -320,8 +320,8 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Copies a classpath resource to the tmp directory to allow it to be run by ansible
-     * @param path
-     * @return
+     * @param path the relative path
+     * @return the File object representing the extracted file
      * @throws IOException if the path is not found
      */
     private File createTmpFile(final String path) throws IOException {
@@ -338,9 +338,9 @@ public abstract class AbstractAnsibleMojo extends AbstractMojo {
 
     /**
      * Copies the input stream to the output stream using a 4K buffer
-     * @param inputStream
-     * @param outputStream
-     * @throws IOException
+     * @param inputStream the stream to copy
+     * @param outputStream the stream to write to
+     * @throws IOException if there is an exception reading or writing
      */
     private void copy(final InputStream inputStream, final FileOutputStream outputStream) throws IOException {
         final byte[] buffer = new byte[1024*4];
