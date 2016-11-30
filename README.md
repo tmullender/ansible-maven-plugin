@@ -154,6 +154,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   moduleArgs|String|Module arguments | No
   moduleName|String|Module name to execute, __defaults__ to _ping_ | __Yes__
   modulePath|File|The path to the ansible module library | No
+  options|List|Additional options to be included in the command | No
   pollInterval|Integer|The poll interval if using background | No
   privateKey|File|Use this file to authenticate the connection | No
   promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
@@ -180,6 +181,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   limit|String|Limit selected hosts to an additional pattern | No
   logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   modulePath|File|The path to the ansible module library | No
+  options|List|Additional options to be included in the command | No
   playbook|File|The playbook to run, __defaults__ to _playbook.yml_ | __Yes__
   pollInterval|Integer|The poll interval if using background | No
   privateKey|File|Use this file to authenticate the connection | No
@@ -211,6 +213,7 @@ Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/ma
   logDirectory|File|If present the plugin will log the output of the execution to files in this directory | No
   moduleName|String|Module name used to check out repository | No
   onlyIfChanged|boolean|Only run the playbook if the repository has been updated, __defaults__ to _false_ | No
+  options|List|Additional options to be included in the command | No
   playbook|File|The playbook to run | No
   purge|boolean|Purge checkout after playbook run, __defaults__ to _false_ | No
   promoteDebugAsInfo|boolean|Output messages will be promoted from debug messages to info messages, __defaults__ to _false_| No
