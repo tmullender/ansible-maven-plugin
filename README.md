@@ -1,6 +1,6 @@
 # Ansible Maven Plugin 
 
-[![Codeship Status for tmullender/ansible-maven-plugin](https://codeship.io/projects/b6180bd0-4127-0132-ff07-7a81632181b7/status?branch=master)](https://codeship.io/projects/44111)
+[![Codeship Status for tmullender/ansible-maven-plugin](https://codeship.com/projects/b6180bd0-4127-0132-ff07-7a81632181b7/status?branch=master)](https://codeship.com/projects/44111)
 [![Build Status](https://travis-ci.org/tmullender/ansible-maven-plugin.svg?branch=master)](https://travis-ci.org/tmullender/ansible-maven-plugin)
 
 A [Maven plugin](http://maven.apache.org/plugins/index.html) to simplify the running 
