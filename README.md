@@ -139,7 +139,7 @@ or in short form
 
 Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
 
-####Parameters
+#### Parameters
   Name | Type | Description | Required
   :----|:----:|:------------|:-------:
   background|Integer|Run asynchronously, failing after this number of seconds | No
@@ -169,7 +169,7 @@ To use a parameter on the command line, prefix it with __ansible.__
 
 Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
 
-####Parameters
+#### Parameters
   Name | Type | Description | Required
   :----|:----:|:------------|:-------:
   connection|String|Connection type to use | No
@@ -201,7 +201,7 @@ To use a parameter on the command line, prefix it with __ansible.__
 
 Binds by default to the [lifecycle phase](http://maven.apache.org/ref/current/maven-core/lifecycles.html): _pre-integration-test_
 
-####Parameters
+#### Parameters
   Name | Type | Description | Required
   :----|:----:|:------------|:-------:
   checkout|String|The branch, tag or commit to checkout | No
