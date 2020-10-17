@@ -46,6 +46,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <skipTests>false</skipTests>
+    <testThreads>4</testThreads>
     <streamLogs>false</streamLogs>
   </properties>
 
@@ -114,7 +115,7 @@
         <version>1.9</version>
         <configuration>
           <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-          <parallelThreads>4</parallelThreads>
+          <parallelThreads>${testThreads}</parallelThreads>
           <debug>true</debug>
           <environmentVariables>
             <PATH>${basedir}/src/test/resources:${env.PATH}</PATH>

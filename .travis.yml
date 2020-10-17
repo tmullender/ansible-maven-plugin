@@ -4,4 +4,4 @@ jdk:
   - oraclejdk8
   - openjdk8
   - openjdk7
-script: mvn verify
+script: mvn verify -DtestThreads=1
