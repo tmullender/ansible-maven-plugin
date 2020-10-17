@@ -4,4 +4,4 @@ jdk:
   - oraclejdk8
   - openjdk8
   - openjdk7
-script: mvn verify -DstreamLogs=true
+script: mvn verify
